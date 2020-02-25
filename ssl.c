@@ -8,69 +8,36 @@ typedef struct node
 } Node;
 
 Node *head = NULL;
+Node *temp = NULL;
 
 void insert_awal();
 void insert_akhir();
 void insert_after();
 void insert_before();
+void alokasi();
 void tampil();
 
 int main(){
     char jwb;
     do
     {
+        alokasi();
         insert_akhir();
         printf("tambah lagi? (y/n) ");
         scanf("%c", &jwb);
     } while (jwb == 'y' || jwb == 'Y');
     tampil();
-    insert_before();
-    tampil();
     return 0;
 }
 
 void insert_awal(){
-    Node *temp = NULL;
-    temp = (Node*)malloc(sizeof(Node));
-    if (temp == NULL)
-    {
-        printf("malloc gagal");
-        exit(0);
-    }
-    
-    printf("masukan angka: ");
-    scanf("%d", &temp->data);
-    fflush(stdin);
-    temp->next = NULL;
-    if (head == NULL)
-    {
-        head = temp;
-    }
-    else
-    {
-        temp->next = head;
-        head = temp;
-    }   
+    if (head != NULL) temp->next = head;
+    head = temp;
 }
 
 void insert_akhir(){
-    Node *temp = NULL;
     Node *tail = NULL;
-    temp = (Node*)malloc(sizeof(Node));
-    if (temp == NULL)
-    {
-        printf("malloc gagal");
-        exit(0);
-    }
-    
-    printf("masukan angka: ");
-    scanf("%d", &temp->data);
-    fflush(stdin);
-    temp->next = NULL;
-    if (head == NULL)
-    {
-        head = temp;
-    }
+    if (head == NULL) head = temp;
     else
     {
         tail = head;
@@ -85,19 +52,7 @@ void insert_akhir(){
 void insert_after()
 {
     int key;
-    Node *temp = NULL;
     Node *after = head;
-    temp = (Node*)malloc(sizeof(Node));
-    if (temp == NULL)
-    {
-        printf("malloc gagal");
-        exit(0);
-    }
-    
-    printf("masukan angka: ");
-    scanf("%d", &temp->data);
-    fflush(stdin);
-    temp->next = NULL;
     printf("masukan setelah: ");
     scanf("%d", &key);
     fflush(stdin);
@@ -105,7 +60,7 @@ void insert_after()
     {
         if (after->next == NULL)
         {
-            printf("%d tidak ada pada SLL", &key);
+            printf("%d tidak ada pada SLL", key);
             exit(0);
         }
         after = after->next;
@@ -117,20 +72,8 @@ void insert_after()
 void insert_before()
 {
     int key;
-    Node *temp = NULL;
     Node *pbefore = head;
     Node *pkey = head;
-    temp = (Node*)malloc(sizeof(Node));
-    if (temp == NULL)
-    {
-        printf("malloc gagal");
-        exit(0);
-    }
-    
-    printf("masukan angka: ");
-    scanf("%d", &temp->data);
-    fflush(stdin);
-    temp->next = NULL;
     printf("masukan sebelum: ");
     scanf("%d", &key);
     fflush(stdin);
@@ -144,16 +87,25 @@ void insert_before()
         pbefore = pkey;
         pkey = pkey->next;
     }
-    if (head->data == key)
-    {
-        temp->next = head;
-        head = temp;
-    }
+    if (head->data == key) insert_awal();
     else
     {
     temp->next = pkey;
     pbefore->next = temp;
     }
+}
+
+void alokasi(){
+    temp = (Node*)malloc(sizeof(Node));
+    if (temp == NULL)
+    {
+        printf("malloc gagal");
+        exit(0);
+    }
+    printf("masukan angka: ");
+    scanf("%d", &temp->data);
+    fflush(stdin);
+    temp->next = NULL;
 }
 
 void tampil()
