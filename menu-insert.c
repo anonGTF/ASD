@@ -43,6 +43,10 @@ void menu()
         printf("masukan pertama tidak boleh insert after atauinsert before\n");
         menu();
     }
+    else if(pilihan == 5)
+    {
+        exit(0);
+    }
     else
     {
         alokasi();
@@ -60,9 +64,6 @@ void menu()
         case 4:
             insert_before();
             break;
-        case 5:
-            exit(0);
-        }
     }
     tampil();
 }
