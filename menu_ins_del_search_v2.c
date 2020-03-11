@@ -146,6 +146,7 @@ void src()
         if (src->data == key)
         {
             exist++;
+            // soal no 1 ada break.e soal no 2 gaada
         }
         else if (src->data > key)
         {
@@ -155,7 +156,7 @@ void src()
     }
     if (exist > 0)
     {
-        printf("\n%d ada %d di SLL\n", key, exist);
+        printf("\n%d ada %d di SLL\n", key, exist); // soal no 1 ga ngeprint exist, no 2 ngeprint
     }
     else
     {
